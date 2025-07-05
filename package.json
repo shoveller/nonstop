@@ -30,6 +30,9 @@
   },
   "private": true,
   "packageManager": "pnpm@9.5.0",
+  "engines": {
+    "node": ">=20.0.0"
+  },
   "dependencies": {
     "husky": "catalog:",
     "turbo": "catalog:"
