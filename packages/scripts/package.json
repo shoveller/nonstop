@@ -1,0 +1,17 @@
+{
+  "name": "@illuwa/scripts",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "version": "node sync-versions.mjs"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "private": true,
+  "bin": {
+    "format-app": "./format.mjs",
+    "sync-catalog": "./sync-catalog.mjs"
+  }
+}

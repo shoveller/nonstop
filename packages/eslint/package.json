@@ -1,0 +1,22 @@
+{
+  "name": "@illuwa/eslint",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.mjs",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "private": true,
+  "dependencies": {
+    "@eslint/js": "catalog:",
+    "@typescript-eslint/eslint-plugin": "catalog:",
+    "@typescript-eslint/parser": "catalog:",
+    "eslint": "catalog:",
+    "eslint-plugin-unused-imports": "catalog:",
+    "globals": "catalog:",
+    "typescript-eslint": "catalog:"
+  }
+}

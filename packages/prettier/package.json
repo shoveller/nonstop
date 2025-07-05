@@ -1,0 +1,19 @@
+{
+  "name": "@illuwa/prettier",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.mjs",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "private": true,
+  "dependencies": {
+    "@ianvs/prettier-plugin-sort-imports": "catalog:",
+    "prettier": "catalog:",
+    "prettier-plugin-classnames": "catalog:",
+    "prettier-plugin-css-order": "catalog:"
+  }
+}

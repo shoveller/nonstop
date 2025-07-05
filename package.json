@@ -1,0 +1,37 @@
+{
+  "name": "nonstop",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "format": "turbo format",
+    "dev": "turbo dev",
+    "sync-catalog": "sync-catalog",
+    "prepare": "husky",
+    "bootstrap": "turbo bootstrap",
+    "build": "turbo build",
+    "deploy": "turbo deploy",
+    "destroy": "turbo destroy"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@semantic-release/changelog": "catalog:",
+    "@semantic-release/commit-analyzer": "catalog:",
+    "@semantic-release/git": "catalog:",
+    "@semantic-release/github": "catalog:",
+    "@semantic-release/npm": "catalog:",
+    "@semantic-release/release-notes-generator": "catalog:",
+    "@types/node": "20",
+    "semantic-release": "catalog:",
+    "typescript": "catalog:",
+    "@illuwa/scripts": "workspace:*"
+  },
+  "private": true,
+  "packageManager": "pnpm@9.5.0",
+  "dependencies": {
+    "husky": "catalog:",
+    "turbo": "catalog:"
+  }
+}
