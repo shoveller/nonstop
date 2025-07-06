@@ -12,7 +12,7 @@
     "bootstrap": "turbo bootstrap",
     "build": "turbo build",
     "deploy": "turbo deploy",
-    "destroy": "turbo destroy"
+    "destroy": "turbo destroy --concurrency=1"
   },
   "keywords": [],
   "author": "",
