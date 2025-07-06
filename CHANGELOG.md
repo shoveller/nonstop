@@ -1,3 +1,10 @@
+## [1.0.1](https://github.com/shoveller/nonstop/compare/1.0.0...1.0.1) (2025-07-06)
+
+
+### Bug Fixes
+
+* 빌드 에러를 수정 ([ca5f507](https://github.com/shoveller/nonstop/commit/ca5f50775d4d5e71d5fbc1236691de111c4d4cc8))
+
 # 1.0.0 (2025-07-06)
 
 
