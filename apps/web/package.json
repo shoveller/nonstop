@@ -8,7 +8,7 @@
     "start": "react-router-serve ./build/server/index.js",
     "typecheck": "react-router typegen && tsc",
     "format": "format-app apps/web",
-    "deploy": "aws-launch",
+    "deploy": "pnpm --filter @illuwa/aws-infra launch",
     "destroy": "aws-destroy"
   },
   "dependencies": {
