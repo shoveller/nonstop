@@ -4,6 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "preinstall": "sync-catalog",
     "format": "turbo format",
     "dev": "turbo dev",
     "sync-catalog": "sync-catalog",
