@@ -2,6 +2,12 @@ name: Deploy RR7 to aws lambda & s3
 
 on:
    workflow_call:
+      inputs:
+         artifacts_name:
+            description: 'Build artifacts name'
+            required: false
+            type: string
+            default: ''
       secrets:
          AWS_ACCOUNT_ID:
             description: 'AWS Account ID'
@@ -31,6 +37,13 @@ jobs:
       steps:
          - name: Checkout repository
            uses: actions/checkout@v4
+
+         - name: Download build artifacts
+           if: ${{ inputs.artifacts_name != '' }}
+           uses: actions/download-artifact@v4
+           with:
+              name: ${{ inputs.artifacts_name }}
+              path: ./
 
          - name: Install pnpm
            uses: pnpm/action-setup@v4

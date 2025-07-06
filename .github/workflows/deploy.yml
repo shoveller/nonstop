@@ -1,0 +1,23 @@
+name: Deploy
+
+on:
+  workflow_dispatch:
+#  push:
+#    branches:
+#      - main
+
+
+jobs:
+  build:
+    name: Build Application
+    uses: ./.github/workflows/build.yml
+    
+  deploy-lambda-aws:
+    name: Deploy to AWS Lambda & S3
+    needs: build
+    uses: ./.github/workflows/deploy-rr7-lambda-s3.yml
+    with:
+      artifacts_name: ${{ needs.build.outputs.build_artifacts }}
+    secrets:
+      AWS_ACCOUNT_ID: ${{ secrets.AWS_ACCOUNT_ID }}
+      AWS_DEFAULT_REGION: ${{ secrets.AWS_DEFAULT_REGION }}

@@ -1,0 +1,53 @@
+name: Build
+
+on:
+  workflow_call:
+    outputs:
+      build_artifacts:
+        description: 'Build artifacts name'
+        value: ${{ jobs.build.outputs.artifacts_name }}
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    outputs:
+      artifacts_name: ${{ steps.artifacts.outputs.name }}
+    
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Install pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: '9.5.0'
+          run_install: false
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20.0.0'
+          cache: 'pnpm'
+
+      - name: Install dependencies
+        run: pnpm i --frozen-lockfile
+
+      - name: 모든 패키지를 빌드
+        run: pnpm build
+
+      - name: Upload build artifacts
+        id: artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: build-artifacts-${{ github.sha }}
+          path: |
+            apps/*/dist
+            apps/*/build
+            packages/*/dist
+            packages/*/build
+          retention-days: 1
+          if-no-files-found: warn
+
+      - name: Set artifacts name output
+        run: echo "name=build-artifacts-${{ github.sha }}" >> $GITHUB_OUTPUT
