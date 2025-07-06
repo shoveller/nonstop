@@ -1,6 +1,6 @@
 {
   "name": "@illuwa/aws-infra",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "AWS infrastructure package using CDK",
   "main": "cdk.js",
   "bin": {
