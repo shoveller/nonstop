@@ -13,7 +13,8 @@ try {
   // launch 스크립트 실행 (pnpm 사용)
   execSync('pnpm run launch', {
     cwd: awsInfraDir,
-    stdio: 'inherit'
+    stdio: 'inherit',
+    env: process.env
   })
   
   console.log('✅ Deployment completed successfully!')
