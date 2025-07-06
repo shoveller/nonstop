@@ -91,7 +91,7 @@ jobs:
               # Run deployment with detailed logging
               echo "📦 Running pnpm deploy..."
               set -x
-              deployment_output=$(pnpm deploy 2>&1)
+              deployment_output=$(pnpm --filter @illuwa/aws-infra launch 2>&1)
               deployment_status=$?
               set +x
               
