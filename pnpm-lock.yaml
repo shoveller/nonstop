@@ -196,6 +196,9 @@ importers:
         specifier: 'catalog:'
         version: 7.6.3(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
     devDependencies:
+      '@illuwa/aws-infra':
+        specifier: workspace:*
+        version: link:../../packages/aws-infra
       '@illuwa/eslint':
         specifier: workspace:*
         version: link:../../packages/eslint

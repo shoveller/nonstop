@@ -8,7 +8,8 @@
     "start": "react-router-serve ./build/server/index.js",
     "typecheck": "react-router typegen && tsc",
     "format": "format-app apps/web",
-    "deploy": "echo 'Web app build already completed, ready for infrastructure deployment'"
+    "deploy": "aws-launch",
+    "destroy": "aws-destroy"
   },
   "dependencies": {
     "@react-router/node": "catalog:",
@@ -30,6 +31,7 @@
     "vite-tsconfig-paths": "catalog:",
     "@illuwa/scripts": "workspace:*",
     "@illuwa/eslint": "workspace:*",
-    "@illuwa/prettier": "workspace:*"
+    "@illuwa/prettier": "workspace:*",
+    "@illuwa/aws-infra": "workspace:*"
   }
 }
