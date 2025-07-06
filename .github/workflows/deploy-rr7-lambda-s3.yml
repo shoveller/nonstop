@@ -60,15 +60,50 @@ jobs:
          - name: Install dependencies
            run: pnpm i --frozen-lockfile
 
+         - name: Pre-deployment checks
+           run: |
+              echo "🔍 Pre-deployment checks..."
+              echo "Current directory: $(pwd)"
+              echo "Available packages:"
+              find . -name "package.json" -not -path "./node_modules/*" | head -10
+              echo "Checking turbo configuration..."
+              if [ -f "turbo.json" ]; then
+                echo "✅ turbo.json found"
+                grep -A 5 '"deploy"' turbo.json || echo "⚠️  No deploy task found in turbo.json"
+              else
+                echo "❌ turbo.json not found"
+              fi
+              echo "Checking for built web assets..."
+              if [ -d "apps/web/build" ]; then
+                echo "✅ Web build directory found"
+                ls -la apps/web/build/
+              else
+                echo "⚠️  Web build directory not found, will build during deployment"
+              fi
+
          - name: Deploy to AWS Lambda
            id: deploy
            env:
               AWS_ACCOUNT_ID: ${{ secrets.AWS_ACCOUNT_ID }}
               AWS_DEFAULT_REGION: ${{ secrets.AWS_DEFAULT_REGION }}
+              CDK_DEFAULT_ACCOUNT: ${{ secrets.AWS_ACCOUNT_ID }}
+              CDK_DEFAULT_REGION: ${{ secrets.AWS_DEFAULT_REGION }}
+              NODE_ENV: production
            run: |
-              echo "Starting deployment..."
+              echo "🚀 Starting deployment..."
+              echo "Environment variables:"
+              echo "- AWS_ACCOUNT_ID: ${AWS_ACCOUNT_ID:0:4}****"
+              echo "- AWS_DEFAULT_REGION: $AWS_DEFAULT_REGION"
+              
+              # Run deployment with detailed logging
+              echo "📦 Running pnpm deploy..."
+              set -x
               deployment_output=$(pnpm deploy 2>&1)
               deployment_status=$?
+              set +x
+              
+              echo "📋 Deployment output:"
+              echo "$deployment_output"
               
               echo "deployment_output<<EOF" >> $GITHUB_OUTPUT
               echo "$deployment_output" >> $GITHUB_OUTPUT
@@ -82,8 +117,10 @@ jobs:
               if [[ -n "$deployment_url" ]]; then
                 cname_value=$(echo "$deployment_url" | sed 's|^https\?://||' | sed 's|/$||')
                 echo "cname=$cname_value" >> $GITHUB_OUTPUT
+                echo "🌐 Deployment URL: $deployment_url"
               else
                 echo "cname=" >> $GITHUB_OUTPUT
+                echo "⚠️  No deployment URL found in output"
               fi
               
               # Set result based on exit status
@@ -92,6 +129,10 @@ jobs:
                 echo "✅ Deployment successful"
               else
                 echo "result=failed" >> $GITHUB_OUTPUT
-                echo "❌ Deployment failed"
+                echo "❌ Deployment failed with exit code: $deployment_status"
+                echo "🔍 Troubleshooting info:"
+                echo "- Check AWS credentials and permissions"
+                echo "- Verify CDK bootstrap is completed"
+                echo "- Check if all required packages have deploy scripts"
                 exit $deployment_status
               fi

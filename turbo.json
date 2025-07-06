@@ -15,12 +15,15 @@
        "dependsOn": ["^version"]
      },
      "build": {},
-     "deploy": {},
+     "deploy": {
+       "dependsOn": ["build"],
+       "cache": false
+     },
      "destroy": {},
      "bootstrap": {},
-     "{{PACKAGE_SCOPE}}/infra#deploy": {
+     "@illuwa/aws-infra#deploy": {
        "dependsOn": [
-         "{{PACKAGE_SCOPE}}/web#build"
+         "@illuwa/web#build"
        ],
        "cache": false
      }
